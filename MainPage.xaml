@@ -1,0 +1,145 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProgressTestNew.MainPage"
+             BackgroundColor="#333333"
+            xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+            
+            >
+
+    <!-- Use ScrollView to allow scrolling when content exceeds the page size -->
+    <ScrollView>
+        <VerticalStackLayout>
+            <!-- Artist's profile container -->
+            <Frame BackgroundColor="#262626" CornerRadius="20" Padding="0" Margin="10" HorizontalOptions="Center" VerticalOptions="Start" BorderColor="Transparent" HasShadow="True">
+                <Frame BackgroundColor="#333333" CornerRadius="20" Padding="10" IsClippedToBounds="True" BorderColor="Transparent" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!-- Circular Image with White Border -->
+                        <Frame Grid.Row="0" Grid.Column="0"
+                   BackgroundColor="#333333" 
+                   Padding="3"
+                   HorizontalOptions="Center" 
+                   VerticalOptions="End" 
+                   WidthRequest="80" 
+                   HeightRequest="80" 
+                   CornerRadius="80"
+                   IsClippedToBounds="True" 
+                   BorderColor="Yellow"
+                              
+                   Margin="0,0,0,-40">
+                            <!-- Negative margin to lift the image out of its frame -->
+                            <Image Source="vincent.png" Aspect="AspectFill" />
+                        </Frame>
+
+                        <StackLayout Grid.Row="1" Orientation="Vertical" Spacing="9" HorizontalOptions="Center" VerticalOptions="Start" Padding="20,60,20,20">
+                            <Label Text="Vincent van Gogh" FontAttributes="Bold" TextColor="White" FontSize="25" HorizontalTextAlignment="Center"/>
+                            <Label Text="Dutch, 1853 – 1890" TextColor="#BBBBBB" FontSize="14" HorizontalTextAlignment="Center"/>
+
+                            <toolkit:Expander>
+                                <toolkit:Expander.Header>
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Was a Dutch Post-Impressionist painter who is among the most famous and influential..." TextColor="#BBBBBB" FontSize="12" CharacterSpacing="1"/>
+                                                <Span Text=" Read More" TextColor="Orange" FontAttributes="Bold" FontSize="12"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </toolkit:Expander.Header>
+                                <StackLayout>
+                                    <Label Text="Was a Dutch Post-Impressionist painter who is among the most famous and influential figures in the history of Western art. In just over a decade, he created about 2,100 artworks, including around 860 oil paintings, most of which date from the last two years of his life. They include landscapes, still lifes, portraits, and self-portraits, and are characterized by bold colors and dramatic, impulsive, and expressive brushwork that contributed to the foundations of modern art."
+                  TextColor="#BBBBBB"
+                  FontSize="12"/>
+                                    <Label HorizontalOptions="Center" HorizontalTextAlignment="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                               
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Source={RelativeSource AncestorType={x:Type toolkit:Expander}}, Path=IsExpanded}" Value="False">
+                                                <Setter Property="IsVisible" Value="False"/>
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                </StackLayout>
+                            </toolkit:Expander>
+                            <!-- Additional details and stats can go here -->
+                        </StackLayout>
+
+                    </Grid>
+                </Frame>
+            </Frame>
+
+            <!-- Top border line -->
+            <BoxView HeightRequest="1" Color="AliceBlue" Margin="10,0"/>
+
+            <!-- Statistics Section -->
+            <Frame Margin="10" Padding="5" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="Transparent" BorderColor="Transparent">
+                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Values -->
+                    <Label Grid.Column="0" Grid.Row="0" Text="$7.5m" TextColor="White" FontSize="Small" HorizontalOptions="Center"/>
+                    <Label Grid.Column="1" Grid.Row="0" Text="$3.5m" TextColor="White" FontSize="Small" HorizontalOptions="Center"/>
+                    <Label Grid.Column="2" Grid.Row="0" Text="+598%" TextColor="Green" FontSize="Small" HorizontalOptions="Center"/>
+                    <Label Grid.Column="3" Grid.Row="0" Text="12" TextColor="White" FontSize="Small" HorizontalOptions="Center"/>
+
+                    <!-- Descriptors -->
+                    <Label Grid.Column="0" Grid.Row="1" Text="Record" TextColor="Grey" FontSize="Small" HorizontalOptions="Center"/>
+                    <Label Grid.Column="1" Grid.Row="1" Text="Average" TextColor="Grey" FontSize="Small" HorizontalOptions="Center"/>
+                    <Label Grid.Column="2" Grid.Row="1" Text="General" TextColor="Grey" FontSize="Small" HorizontalOptions="Center"/>
+                    <Label Grid.Column="3" Grid.Row="1" Text="Items" TextColor="Grey" FontSize="Small" HorizontalOptions="Center"/>
+                </Grid>
+            </Frame>
+
+            <!-- Bottom border line -->
+            <BoxView HeightRequest="1" Color="AliceBlue" Margin="10,0"/>
+
+            <!-- Continue with the rest of your content below -->
+
+            <!-- Then place your CollectionView after this Frame -->
+            <Label Text="Other van gough work" FontSize="Large" TextColor="White" Padding="10"></Label>
+
+
+            <!-- List of artworks with two items per row and spacing between items -->
+            <CollectionView ItemsSource="{Binding ArtWorks}" Margin="10">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="10" VerticalItemSpacing="10" />
+                    <!-- Added spacing between items -->
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="10" Padding="0" BackgroundColor="Transparent" HasShadow="False" BorderColor="Transparent">
+                            <StackLayout Spacing="10">
+                                <!-- Added spacing between image and text within the item -->
+                                <!-- Wrap the image in a Frame to apply CornerRadius -->
+                                <Frame CornerRadius="20" Padding="0" IsClippedToBounds="True" HasShadow="False" BorderColor="Transparent">
+                                    <Image Source="{Binding ImgUrl}" Aspect="AspectFill" HeightRequest="150"/>
+                                </Frame>
+                                <Label Text="{Binding Title}" TextColor="White" FontSize="Small" FontAttributes="Bold" />
+                                <Label Text="{Binding Price}" TextColor="LightGray" FontSize="Small"/>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
